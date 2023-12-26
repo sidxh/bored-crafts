@@ -11,7 +11,8 @@ export default function Home() {
   };
   return (
     <main>
-      <h1>Home</h1>
+      <h1>UI Crafts -- By Siddhant</h1>
+      <p>currently in progress, one component at a time</p>
       <Button appearance="success" rounded='large'>Hello</Button>
       <Dropdown
         options={['Option 1', 'Option 2', 'Option 3']}
