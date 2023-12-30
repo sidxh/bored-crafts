@@ -4,7 +4,6 @@ type ButtonSizeType = 'small' | 'medium' | 'large';
 type ButtonAppearanceType = 'primary' | 'solid' | 'outline' | 'link' | 'success' | 'danger';
 type ButtonRoundedType = 'none' | 'small' | 'medium' | 'large';
 
-
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     size?: ButtonSizeType;
     appearance?: ButtonAppearanceType;
