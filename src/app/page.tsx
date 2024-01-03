@@ -2,7 +2,6 @@
 
 import Button from "@/components/Button";
 import Dropdown from "@/components/Dropdown";
-import Navbar from "@/components/Navbar";
 
 export default function Home() {
   const options = ['Option 1', 'Option 2', 'Option 3'];
