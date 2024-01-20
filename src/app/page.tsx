@@ -8,17 +8,9 @@ export default function Home() {
       <div className="my-12 border-2 border-blue-400 grid grid-cols-2 text-left text-lg font-bold underline max-h-[500px] overflow-y-scroll">
         <ul className="flex flex-col">
           <Link href='/button' className="mb-4 w-fit hover:text-yellow-600">button</Link>
-          <Link href='/dropdown' className="mb-4 w-fit hover:text-yellow-600">dropdown</Link>
-          <Link href='/navbar' className="mb-4 w-fit hover:text-yellow-600">navbar</Link>
-          <Link href='/checkbox' className="mb-4 w-fit hover:text-yellow-600">checkbox</Link>
-          <Link href='/chatbox' className="mb-4 w-fit hover:text-yellow-600">chatbox</Link>
         </ul>
         <ul className="flex flex-col">
-          <Link href='/button' className="mb-4 w-fit hover:text-yellow-600">button</Link>
           <Link href='/dropdown' className="mb-4 w-fit hover:text-yellow-600">dropdown</Link>
-          <Link href='/navbar' className="mb-4 w-fit hover:text-yellow-600">navbar</Link>
-          <Link href='/checkbox' className="mb-4 w-fit hover:text-yellow-600">checkbox</Link>
-          <Link href='/chatbox' className="mb-4 w-fit hover:text-yellow-600">chatbox</Link>
         </ul>
       </div>
     </main>

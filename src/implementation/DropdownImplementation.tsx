@@ -1,11 +1,11 @@
-// components/DropdownImplementation.js
+
 import React from 'react';
+import DropdownContent from '../app/content/DropdownContent.mdx';
 
 const DropdownImplementation = () => {
   return (
     <div>
-      <h2>Dropdown Implementation</h2>
-      {/* Your Dropdown component implementation details go here */}
+      <DropdownContent />
     </div>
   );
 };
