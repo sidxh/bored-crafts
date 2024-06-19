@@ -9,7 +9,10 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     appearance?: ButtonAppearanceType;
     rounded?: ButtonRoundedType;
     fullWidth?: boolean;
+    className?: string;
 }
+
+const ButtonBaseClass = 'transition-all flex items-center justify-center border shadow-lg active:shadow';
 
 const ButtonSizeClass = {
     small: 'px-3 py-1.5 rounded text-sm font-normal',
@@ -18,10 +21,8 @@ const ButtonSizeClass = {
 };
 
 const ButtonAppearanceClass = {
-    primary:
-        'bg-orange-500 text-white border-transparent hover:brightness-105 active:brightness-110',
-    solid:
-        'bg-gray-900 text-gray-200 border-transparent hover:brightness-105 active:brightness-110',
+    primary: 'bg-orange-500 text-white border-transparent hover:brightness-105 active:brightness-110',
+    solid: 'bg-gray-900 text-gray-200 border-transparent hover:brightness-105 active:brightness-110',
     outline: 'bg-white text-gray-800 border border-gray-300 hover:bg-gray-50',
     link: 'text-blue-500 hover:underline',
     success: 'bg-green-500 text-white hover:brightness-105 active:brightness-110',
@@ -38,20 +39,20 @@ const ButtonRoundedClass = {
 const ButtonFullWidthClass = 'w-full';
 
 const Button: React.FunctionComponent<ButtonProps> = ({
+    className,
     size = 'medium',
     appearance = 'primary',
     rounded = 'none',
     fullWidth = false,
-    className,
     ...attr
 }) => {
     const buttonStyleClass = cn(
-        'transition-all flex items-center justify-center gap-1 border shadow-lg active:shadow',
+        ButtonBaseClass,
         ButtonAppearanceClass[appearance],
         ButtonSizeClass[size],
         ButtonRoundedClass[rounded],
         fullWidth && ButtonFullWidthClass,
-        className,
+        className, // Move this line to the end
     );
 
     return (

@@ -1,27 +1,33 @@
 "use client"
-// Dropdown.tsx
-
 import React, { useState, useRef, useEffect, MouseEvent } from 'react';
 import { cn } from '@/lib/utils';
+import { motion } from "framer-motion"
+import { ChevronDown } from 'lucide-react';
 
 // Define the variant type
-type DropdownVariant = 'PRIMARY' | 'DEFAULT' | 'SECONDARY';
+type DropdownVariant = 'primary' | 'default' | 'secondary';
 
 // Define the DropdownProps including the variant and title
 interface DropdownProps {
   options: string[];
   onSelect: (selectedOption: string) => void;
-  variant: DropdownVariant; // Add the variant prop
+  variant?: DropdownVariant; // Make the variant prop optional
   title?: string; // Add the title prop
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ options, onSelect, variant, title = 'Select an option' }) => {
+const Dropdown: React.FC<DropdownProps> = ({
+  options,
+  onSelect,
+  variant = 'default', // Set a default value for the variant prop
+  title = 'Select an option', // Set a default value for the title prop
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [activeTab, setActiveTab] = useState("");
 
   const handleToggle = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prevState) => !prevState);
   };
 
   const handleClickOutside: any = (event: React.MouseEvent<Document, MouseEvent>) => {
@@ -45,50 +51,57 @@ const Dropdown: React.FC<DropdownProps> = ({ options, onSelect, variant, title =
   }, []);
 
   // Define predefined styles for variants
-  const getVariantStyles = (variant: DropdownVariant) => {
-    switch (variant) {
-      case 'PRIMARY':
-        return {
-          buttonClassName: 'bg-blue-500 text-white px-4 py-2 rounded-md focus:outline-none',
-          dropdownClassName: 'absolute mt-1 p-2 bg-blue-100 border rounded-md shadow-lg',
-        };
-      case 'SECONDARY':
-        return {
-          buttonClassName: 'bg-gray-500 text-white px-4 py-2 rounded-md focus:outline-none',
-          dropdownClassName: 'absolute mt-1 p-2 bg-gray-100 border rounded-md shadow-lg',
-        };
-      default:
-        return {
-          buttonClassName: 'bg-gray-300 text-gray-700 px-4 py-2 rounded-md focus:outline-none',
-          dropdownClassName: 'absolute mt-1 p-2 bg-white border rounded-md shadow-lg',
-        };
-    }
+  const variantStyles = {
+    primary: {
+      buttonClassName: 'bg-blue-500 text-white px-4 py-2 rounded-md focus:outline-none',
+      dropdownClassName: 'absolute mt-1 p-2 bg-blue-100 border rounded-md shadow-lg',
+    },
+    secondary: {
+      buttonClassName: 'bg-red-500 text-white px-4 py-2 rounded-md focus:outline-none',
+      dropdownClassName: 'absolute mt-1 p-2 bg-red-100 border rounded-md shadow-lg',
+    },
+    default: {
+      buttonClassName: 'bg-gray-500 text-gray-100 px-4 py-2 rounded-md focus:outline-none',
+      dropdownClassName: 'absolute mt-1 p-2 bg-gray-100 border rounded-md shadow-lg',
+    },
   };
 
   // Get styles based on the selected variant
-  const { buttonClassName, dropdownClassName } = getVariantStyles(variant);
+  const { buttonClassName, dropdownClassName } = variantStyles[variant];
 
   return (
-    <div className="relative inline-block" ref={dropdownRef}>
+    <div className="" ref={dropdownRef}>
       <button
-        className={buttonClassName}
+        className={cn(buttonClassName, "flex items-center gap-2")}
         onClick={handleToggle}
       >
-        {selectedOption || title || 'Select an option'}
+        {selectedOption || title}
+        <ChevronDown />
       </button>
       {isOpen && (
         <div className={dropdownClassName}>
           {options.map((option) => (
-            <div
-              key={option}
+            <motion.p
+              layout
               className={cn(
-                'cursor-pointer hover:bg-gray-100 p-2 rounded-md',
-                selectedOption === option && 'bg-gray-200',
+                "relative cursor-pointer px-10 py-1 text-md outline-none transition-colors",
+                activeTab === option ? "text-gray-800" : "text-gray-700",
               )}
+              tabIndex={0}
+              key={option}
+              onFocus={() => setActiveTab(option)}
+              onMouseOver={() => setActiveTab(option)}
+              onMouseLeave={() => setActiveTab("")}
               onClick={() => handleOptionClick(option)}
             >
-              {option}
-            </div>
+              {activeTab === option ? (
+                <motion.div
+                  layoutId="tab-indicator"
+                  className="absolute inset-0 rounded-lg bg-black/5"
+                />
+              ) : null}
+              <span className="relative text-inherit">{option}</span>
+            </motion.p>
           ))}
         </div>
       )}

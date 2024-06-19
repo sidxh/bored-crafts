@@ -10,11 +10,23 @@ export default function DropdownPreview(){
     }
 
     return(
-        <div>
+        <div className="flex gap-20 justify-center">
             <Dropdown
-            options={['Option 1', 'Option 2', 'Option 3']}
+            options={options}
             onSelect={handleSelect}
-            variant="PRIMARY"
+            variant="default"
+            title="Yes This Shit"
+            />
+            <Dropdown
+            options={options}
+            onSelect={handleSelect}
+            variant="primary"
+            title="Yes This Shit"
+            />
+            <Dropdown
+            options={options}
+            onSelect={handleSelect}
+            variant="secondary"
             title="Yes This Shit"
             />
         </div>
