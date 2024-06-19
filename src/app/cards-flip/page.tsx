@@ -1,21 +1,21 @@
-// pages/dropdown/index.js
+// pages/CardsFlip/index.js
 "use client"
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import DropdownImplementation from '@/implementation/DropdownImplementation';
-import DropdownPreview from '@/preview/DropdownPreview';
+import CardsFlipImplementation from '@/implementation/CardsFlipImplementation';
+import CardsFlipPreview from '@/preview/CardsFlipPreview';
 
 
-const DropdownCraft = () => {
+const CardsFlipCraft = () => {
   const [activeTab, setActiveTab] = useState('preview');
 
   const renderTabContent = () => {
     switch (activeTab) {
       case 'implementation':
-        return <DropdownImplementation />;
+        return <CardsFlipImplementation />;
       case 'preview':
-        return <DropdownPreview />;
+        return <CardsFlipPreview />;
       default:
         return null;
     }
@@ -25,12 +25,12 @@ const DropdownCraft = () => {
     <div className='max-w-screen-xl mx-auto text-lg font-bold'>
       <div className='border-2 border-red-400 flex gap-16 py-4 mb-20 pr-2'>
         <Link href="/" className='mr-auto'>boredCrafts</Link>
-        <Link href="/dropdown" onClick={() => setActiveTab('preview')}>Preview</Link>
-        <Link href="/dropdown" onClick={() => setActiveTab('implementation')}>Implementation</Link>
+        <Link href="/cards-flip" onClick={() => setActiveTab('preview')}>Preview</Link>
+        <Link href="/cards-flip" onClick={() => setActiveTab('implementation')}>Implementation</Link>
       </div>
       {renderTabContent()}
     </div>
   );
 };
 
-export default DropdownCraft;
+export default CardsFlipCraft;
