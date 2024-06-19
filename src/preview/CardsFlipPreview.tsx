@@ -4,6 +4,7 @@ import CardsFlip from "@/components/CardsFlip"
 const CardsFlipPreview = () => {
   return (
     <div>
+      
       <CardsFlip />
     </div>
   )
