@@ -1,12 +1,11 @@
-import CardsFlipCraft from "@/app/cards-flip/page"
-import CardsFlip from "@/components/CardsFlip"
+import LumaClone from "@/components/LumaClone"
 
-const CardsFlipPreview = () => {
+const LumaClonePreview = () => {
   return (
     <div>
-      <CardsFlip />
+      <LumaClone />
     </div>
   )
 }
 
-export default CardsFlipPreview
+export default LumaClonePreview
