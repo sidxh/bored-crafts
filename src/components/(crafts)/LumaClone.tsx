@@ -9,7 +9,7 @@ const LumaClone = () => {
   const now = new Date();
   const todaysDate = date.format(now, 'hh:mm A [GMT]Z');
   return (
-    <div className='border-2 border-black h-[95vh] my-20 bg-[#141414] text-white rounded-2xl overflow-auto'>
+    <div className='border-2 border-black h-[100vh] bg-[#141414] text-white overflow-auto'>
       <div className='flex p-4 gap-4 text-sm items-center text-[#8B8B8B] cursor-pointer'>
         <div className='mr-auto'>
           <Image
@@ -58,7 +58,7 @@ const LumaClone = () => {
         </button>
 
           <button className="flex items-center gap-2 text-sm bg-[#282828] rounded-lg px-2 py-2">
-            <svg className='w-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="currentColor" fill-rule="evenodd" d="M12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0m-.965 5.096a6.5 6.5 0 1 1 1.06-1.06l2.935 2.934a.75.75 0 1 1-1.06 1.06z"></path></svg>
+            <svg className='w-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="currentColor" fillRule="evenodd" d="M12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0m-.965 5.096a6.5 6.5 0 1 1 1.06-1.06l2.935 2.934a.75.75 0 1 1-1.06 1.06z"></path></svg>
           </button>
 
           </div>

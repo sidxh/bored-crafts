@@ -1,6 +1,6 @@
 
 import React from 'react';
-import LumaCloneContent from '../app/content/LumaCloneContent.mdx'
+import LumaCloneContent from '@/content/LumaCloneContent.mdx'
 
 const LumaCloneImplementation = ():any => {
   return (
