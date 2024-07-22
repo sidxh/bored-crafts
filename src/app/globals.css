@@ -2,11 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer utilities {
-    .full-width-exception {
-      max-width: 100% !important;
-      margin-left: 0 !important;
-      margin-right: 0 !important;
-    }
+  .scrollbar::-webkit-scrollbar {
+    width: 12px;
+    height: 1%;
   }
+}

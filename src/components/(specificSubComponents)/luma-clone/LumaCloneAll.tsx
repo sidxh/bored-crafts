@@ -105,7 +105,7 @@ export function LumaEventsCard(props: any){
         <div className='mb-8 relative'>
             <hr className='flex h-[25vh] border-[1px] border-white absolute opacity-35'/>
             <h1 className='text-sm mx-4'>{props.date}<span className='text-[#8B8B8B]'> {props.day}</span></h1>
-            <div className='bg-[#1D1D1D] m-4 mx-5 rounded-lg hover:border-[1px] hover:border-gray-500 p-4 px-5 flex justify-between'>
+            <div className='bg-[#1D1D1D] m-4 mx-5 rounded-lg border-[1px] border-transparent hover:border-[1px] hover:border-gray-500 p-4 px-5 flex justify-between'>
                 <div>
                     <p className='text-xs text-[#8B8B8B] mb-2'>{props.time}</p>
                     <h1 className='text-sm font-normal mb-2'>{props.name}</h1>

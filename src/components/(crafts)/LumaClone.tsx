@@ -9,7 +9,7 @@ import {
   LumaHero,
   LumaBody,
   LumaNavbar
-} from '@/components/(specificSubComponents)/luma-clone/LumaAll';
+} from '@/components/(specificSubComponents)/luma-clone/LumaCloneAll';
 
 const LumaClone = () => {
   return (
