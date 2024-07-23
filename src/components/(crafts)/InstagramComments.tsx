@@ -251,6 +251,7 @@ const CommentSection = React.forwardRef<HTMLDivElement, CommentSectionProps>(
     );
   }
 );
+CommentSection.displayName = 'CommentSection';
 
 // Main InstagramComments component
 const InstagramComments: React.FC = () => {
