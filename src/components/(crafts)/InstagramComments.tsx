@@ -3,7 +3,8 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Heart, MessageCircle, Send, MoreHorizontal, Bookmark, Image, EllipsisVertical } from 'lucide-react';
+import { Heart, MessageCircle, Send, MoreHorizontal, Bookmark, EllipsisVertical, Sticker } from 'lucide-react';
+import Image from 'next/image';
 
 // Types
 interface Comment {
@@ -64,7 +65,13 @@ const InstagramPost: React.FC<{ post: Post; onViewComments: () => void }> = ({ p
     <div className="bg-white border border-gray-300 rounded-md overflow-hidden w-full">
       <div className="p-3 flex justify-between items-center">
         <div className="flex items-center">
-          <img src={`https://i.pravatar.cc/150?u=${post.username}`} alt={post.username} className="w-8 h-8 rounded-full mr-2" />
+        <Image 
+          src={`https://i.pravatar.cc/150?u=${post.username}`}
+          alt={post.username}
+          width={32}
+          height={32}
+          className="rounded-full mr-2"
+        />
           <div>
             <p className="font-bold text-sm">{post.username}</p>
             <p className="text-xs text-gray-500">{post.location}</p>
@@ -80,7 +87,14 @@ const InstagramPost: React.FC<{ post: Post; onViewComments: () => void }> = ({ p
           <EllipsisVertical className="w-6 h-6" />
         </div>
       </div>
-      <img src={post.imageUrl} alt="Instagram Post" className="w-full h-auto" />
+      <Image 
+        src={post.imageUrl}
+        alt="Instagram Post"
+        width={100}
+        height={100}
+        layout="responsive"
+        className="w-full h-auto"
+      />
       <div className="p-4">
         <div className="flex justify-between items-center mb-2">
           <div className="flex space-x-4">
@@ -126,7 +140,13 @@ const CommentItem: React.FC<{ comment: Comment }> = ({ comment }) => {
 
   return (
     <div className="flex items-start mb-4">
-      <img src={comment.profilePic} alt={comment.username} className="w-9 h-9 rounded-full mr-2 mt-1" />
+      <Image 
+        src={comment.profilePic}
+        alt={comment.username}
+        width={36}
+        height={36}
+        className="rounded-full mr-2 mt-1"
+      />
       <div className="flex-grow">
         <div className="flex justify-between items-start">
           <div>
@@ -213,13 +233,19 @@ const CommentSection = React.forwardRef<HTMLDivElement, CommentSectionProps>(
           <div ref={loadMoreRef} className="h-1" />
         </motion.div>
         <div className="absolute bottom-0 left-0 right-0 bg-white p-4 border-t border-gray-200 flex items-center">
-          <img src="https://i.pravatar.cc/150?img=1" alt="Your profile" className="w-8 h-8 rounded-full mr-2" />
+          <Image 
+            src="https://i.pravatar.cc/150?img=1"
+            alt="Your profile"
+            width={32}
+            height={32}
+            className="rounded-full mr-2"
+          />
           <input
             type="text"
             placeholder="Add a comment..."
             className="flex-grow border border-gray-300 rounded-full px-4 py-2 mr-2 focus:outline-none focus:border-blue-500"
           />
-          <Image className="w-6 h-6 text-gray-500 cursor-pointer" />
+          <Sticker className="w-6 h-6 text-gray-500 cursor-pointer" />
         </div>
       </motion.div>
     );
