@@ -46,7 +46,7 @@ const generateSampleComments = (count: number): Comment[] => {
 const samplePost: Post = {
   id: 'post-1',
   username: 'sampleuser',
-  caption: 'This is a sample Instagram post caption.',
+  caption: 'this is a sample Instagram post caption.',
   imageUrl: '/instagram-comments/post.png',
   likes: 1234,
   commentCount: 123,
@@ -153,73 +153,78 @@ const CommentItem: React.FC<{ comment: Comment }> = ({ comment }) => {
 }
 
 // CommentSection component
-const CommentSection: React.FC<{
+interface CommentSectionProps {
   comments: Comment[];
   loading: boolean;
   onDragEnd: (event: any, info: any) => void;
   loadMoreComments: () => void;
   isVisible: boolean;
-}> = ({ comments, loading, onDragEnd, loadMoreComments, isVisible }) => {
-  const { ref: loadMoreRef, inView } = useInView();
-  const [isExpanded, setIsExpanded] = useState(false);
+}
 
-  useEffect(() => {
-    if (inView && !loading) {
-      loadMoreComments();
-    }
-  }, [inView, loading, loadMoreComments]);
+const CommentSection = React.forwardRef<HTMLDivElement, CommentSectionProps>(
+  ({ comments, loading, onDragEnd, loadMoreComments, isVisible }, ref) => {
+    const { ref: loadMoreRef, inView } = useInView();
+    const [isExpanded, setIsExpanded] = useState(false);
 
-  return (
-    <motion.div
-      initial={{ y: '100%' }}
-      animate={{ y: isVisible ? 0 : '100%', height: isExpanded ? '95%' : '75%' }}
-      transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-      drag="y"
-      dragConstraints={{ top: 0, bottom: 0 }}
-      onDragEnd={(_, info) => {
-        if (info.offset.y < -50 && !isExpanded) {
-          setIsExpanded(true);
-        } else if (info.offset.y > 50 && isExpanded) {
-          setIsExpanded(false);
-        }
-        onDragEnd(_, info);
-      }}
-      className="fixed inset-x-0 bottom-4 bg-white rounded-t-2xl shadow-lg overflow-hidden w-full max-w-md mx-auto"
-    >
-      <div className="absolute top-0 left-0 right-0 bg-white p-4 border-b border-gray-200 z-10">
-        <div className="w-12 h-1 bg-gray-300 rounded-full mx-auto mb-2" />
-        <h2 className="text-lg font-bold text-center">Comments</h2>
-      </div>
-      <motion.div 
-        className="overflow-y-auto pt-24 px-4 scrollbar-hide"
-        animate={{ height: isExpanded ? 'calc(95% - 36px)' : 'calc(85%)' }}
+    useEffect(() => {
+      if (inView && !loading) {
+        loadMoreComments();
+      }
+    }, [inView, loading, loadMoreComments]);
+
+    return (
+      <motion.div
+        ref={ref}
+        initial={{ y: '100%' }}
+        animate={{ y: isVisible ? 0 : '100%', height: isExpanded ? '95%' : '75%' }}
+        transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+        drag="y"
+        dragConstraints={{ top: 0, bottom: 0 }}
+        onDragEnd={(_, info) => {
+          if (info.offset.y < -50 && !isExpanded) {
+            setIsExpanded(true);
+          } else if (info.offset.y > 50 && isExpanded) {
+            setIsExpanded(false);
+          }
+          onDragEnd(_, info);
+        }}
+        className="fixed inset-x-0 bottom-4 bg-white rounded-t-2xl shadow-lg overflow-hidden w-full max-w-md mx-auto"
       >
-        {comments.map((comment) => (
-          <CommentItem key={comment.id} comment={comment} />
-        ))}
-        {loading && (
-          <div className="text-center py-4">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-              className="w-6 h-6 border-t-2 border-blue-500 rounded-full mx-auto"
-            />
-          </div>
-        )}
-        <div ref={loadMoreRef} className="h-1" />
+        <div className="absolute top-0 left-0 right-0 bg-white p-4 border-b border-gray-200 z-10">
+          <div className="w-12 h-1 bg-gray-300 rounded-full mx-auto mb-2" />
+          <h2 className="text-lg font-bold text-center">Comments</h2>
+        </div>
+        <motion.div 
+          className="overflow-y-auto pt-24 px-4 scrollbar-hide"
+          animate={{ height: isExpanded ? 'calc(95% - 36px)' : 'calc(85%)' }}
+        >
+          {comments.map((comment) => (
+            <CommentItem key={comment.id} comment={comment} />
+          ))}
+          {loading && (
+            <div className="text-center py-4">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                className="w-6 h-6 border-t-2 border-blue-500 rounded-full mx-auto"
+              />
+            </div>
+          )}
+          <div ref={loadMoreRef} className="h-1" />
+        </motion.div>
+        <div className="absolute bottom-0 left-0 right-0 bg-white p-4 border-t border-gray-200 flex items-center">
+          <img src="https://i.pravatar.cc/150?img=1" alt="Your profile" className="w-8 h-8 rounded-full mr-2" />
+          <input
+            type="text"
+            placeholder="Add a comment..."
+            className="flex-grow border border-gray-300 rounded-full px-4 py-2 mr-2 focus:outline-none focus:border-blue-500"
+          />
+          <Image className="w-6 h-6 text-gray-500 cursor-pointer" />
+        </div>
       </motion.div>
-      <div className="absolute bottom-0 left-0 right-0 bg-white p-4 border-t border-gray-200 flex items-center">
-        <img src="https://i.pravatar.cc/150?img=1" alt="Your profile" className="w-8 h-8 rounded-full mr-2" />
-        <input
-          type="text"
-          placeholder="Add a comment..."
-          className="flex-grow border border-gray-300 rounded-full px-4 py-2 mr-2 focus:outline-none focus:border-blue-500"
-        />
-        <Image className="w-6 h-6 text-gray-500 cursor-pointer" />
-      </div>
-    </motion.div>
-  );
-};
+    );
+  }
+);
 
 // Main InstagramComments component
 const InstagramComments: React.FC = () => {
@@ -227,6 +232,7 @@ const InstagramComments: React.FC = () => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const commentSectionRef = useRef<HTMLDivElement>(null);
 
   const loadMoreComments = useCallback(async () => {
     setLoading(true);
@@ -251,7 +257,9 @@ const InstagramComments: React.FC = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+      if (showComments && 
+          commentSectionRef.current && 
+          !commentSectionRef.current.contains(event.target as Node)) {
         setShowComments(false);
       }
     };
@@ -260,13 +268,14 @@ const InstagramComments: React.FC = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [showComments]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 py-2">
       <div className="relative w-full max-w-md mx-auto" ref={containerRef}>
         <InstagramPost post={samplePost} onViewComments={handleViewComments} />
         <CommentSection
+          ref={commentSectionRef}
           comments={comments}
           loading={loading}
           onDragEnd={handleDragEnd}
