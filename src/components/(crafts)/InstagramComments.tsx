@@ -3,7 +3,7 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Heart, MessageCircle, Send, MoreHorizontal, Bookmark, Image } from 'lucide-react';
+import { Heart, MessageCircle, Send, MoreHorizontal, Bookmark, Image, EllipsisVertical } from 'lucide-react';
 
 // Types
 interface Comment {
@@ -55,30 +55,29 @@ const samplePost: Post = {
 };
 
 // InstagramPost component
-// InstagramPost component
 const InstagramPost: React.FC<{ post: Post; onViewComments: () => void }> = ({ post, onViewComments }) => {
-  const [isLiked, setIsLiked] = useState(false);
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isLiked, setIsLiked] = useState(true);
+  const [isBookmarked, setIsBookmarked] = useState(true);
   const [isFollowing, setIsFollowing] = useState(false);
 
   return (
     <div className="bg-white border border-gray-300 rounded-md overflow-hidden w-full">
-      <div className="p-4 flex justify-between items-center">
+      <div className="p-3 flex justify-between items-center">
         <div className="flex items-center">
           <img src={`https://i.pravatar.cc/150?u=${post.username}`} alt={post.username} className="w-8 h-8 rounded-full mr-2" />
           <div>
-            <p className="font-bold">{post.username}</p>
-            <p className="text-sm text-gray-500">{post.location}</p>
+            <p className="font-bold text-sm">{post.username}</p>
+            <p className="text-xs text-gray-500">{post.location}</p>
           </div>
         </div>
         <div className="flex items-center">
           <button 
-            className={`px-2 py-1 rounded-md text-sm mr-2 ${isFollowing ? 'bg-gray-200 text-black' : 'bg-blue-500 text-white'}`}
+            className={`px-3 py-1 rounded-md text-sm mr-2 ${isFollowing ? 'bg-gray-200 text-black' : 'bg-blue-500 text-white'}`}
             onClick={() => setIsFollowing(!isFollowing)}
           >
             {isFollowing ? 'Following' : 'Follow'}
           </button>
-          <MoreHorizontal className="w-6 h-6" />
+          <EllipsisVertical className="w-6 h-6" />
         </div>
       </div>
       <img src={post.imageUrl} alt="Instagram Post" className="w-full h-auto" />
@@ -93,7 +92,7 @@ const InstagramPost: React.FC<{ post: Post; onViewComments: () => void }> = ({ p
             <Send className="w-6 h-6 cursor-pointer" />
           </div>
           <Bookmark 
-            className={`w-6 h-6 cursor-pointer ${isBookmarked ? 'text-yellow-500 fill-current' : ''}`}
+            className={`w-6 h-6 cursor-pointer ${isBookmarked ? 'text-blue-500 fill-current' : ''}`}
             onClick={() => setIsBookmarked(!isBookmarked)}
           />
         </div>
@@ -113,26 +112,45 @@ const InstagramPost: React.FC<{ post: Post; onViewComments: () => void }> = ({ p
 
 // CommentItem component
 const CommentItem: React.FC<{ comment: Comment }> = ({ comment }) => {
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(comment.likes);
+
+  const handleLike = () => {
+    if (isLiked) {
+      setLikeCount(prevCount => prevCount - 1);
+    } else {
+      setLikeCount(prevCount => prevCount + 1);
+    }
+    setIsLiked(!isLiked);
+  };
+
   return (
     <div className="flex items-start mb-4">
-      <img src={comment.profilePic} alt={comment.username} className="w-8 h-8 rounded-full mr-2" />
+      <img src={comment.profilePic} alt={comment.username} className="w-9 h-9 rounded-full mr-2 mt-1" />
       <div className="flex-grow">
         <div className="flex justify-between items-start">
           <div>
-            <span className="font-bold">{comment.username}</span>
-            <span className="text-gray-500 text-xs ml-2">{comment.timestamp}</span>
+            <span className="font-bold text-xs">{comment.username}</span>
+            <span className="text-gray-500 text-xs mx-2">{comment.timestamp}</span>
           </div>
           <div className="flex items-center">
-            <Heart className="w-4 h-4 text-gray-500 mr-1" />
-            <span className="text-gray-500 text-xs">{comment.likes}</span>
+            <button 
+              onClick={handleLike}
+              className="focus:outline-none"
+            >
+              <Heart 
+                className={`w-4 h-4 mr-1 ${isLiked ? 'text-red-500 fill-current' : 'text-gray-500'}`} 
+              />
+            </button>
+            <span className="text-gray-500 text-xs">{likeCount}</span>
           </div>
         </div>
-        <p className="mt-1">{comment.text}</p>
+        <p className="text-sm font-medium">{comment.text}</p>
         <button className="text-gray-500 text-xs mt-1">Reply</button>
       </div>
     </div>
   );
-};
+}
 
 // CommentSection component
 const CommentSection: React.FC<{
@@ -140,9 +158,10 @@ const CommentSection: React.FC<{
   loading: boolean;
   onDragEnd: (event: any, info: any) => void;
   loadMoreComments: () => void;
-}> = ({ comments, loading, onDragEnd, loadMoreComments }) => {
+  isVisible: boolean;
+}> = ({ comments, loading, onDragEnd, loadMoreComments, isVisible }) => {
   const { ref: loadMoreRef, inView } = useInView();
-  const [height, setHeight] = useState('75%');
+  const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     if (inView && !loading) {
@@ -153,26 +172,28 @@ const CommentSection: React.FC<{
   return (
     <motion.div
       initial={{ y: '100%' }}
-      animate={{ y: 0, height }}
-      exit={{ y: '100%' }}
+      animate={{ y: isVisible ? 0 : '100%', height: isExpanded ? '95%' : '75%' }}
       transition={{ type: 'spring', damping: 30, stiffness: 300 }}
       drag="y"
       dragConstraints={{ top: 0, bottom: 0 }}
       onDragEnd={(_, info) => {
-        if (info.offset.y < -50) {
-          setHeight('100%');
-        } else if (info.offset.y > 50) {
-          setHeight('75%');
+        if (info.offset.y < -50 && !isExpanded) {
+          setIsExpanded(true);
+        } else if (info.offset.y > 50 && isExpanded) {
+          setIsExpanded(false);
         }
         onDragEnd(_, info);
       }}
-      className="fixed inset-x-0 bottom-0 bg-white rounded-t-2xl shadow-lg overflow-hidden w-full max-w-md mx-auto"
+      className="fixed inset-x-0 bottom-4 bg-white rounded-t-2xl shadow-lg overflow-hidden w-full max-w-md mx-auto"
     >
       <div className="absolute top-0 left-0 right-0 bg-white p-4 border-b border-gray-200 z-10">
-        <div className="w-12 h-1 bg-gray-300 rounded-full mx-auto mb-4" />
-        <h2 className="text-lg font-bold">Comments</h2>
+        <div className="w-12 h-1 bg-gray-300 rounded-full mx-auto mb-2" />
+        <h2 className="text-lg font-bold text-center">Comments</h2>
       </div>
-      <div className="overflow-y-auto h-full pt-20 pb-16 px-4 scrollbar-hide">
+      <motion.div 
+        className="overflow-y-auto pt-24 px-4 scrollbar-hide"
+        animate={{ height: isExpanded ? 'calc(95% - 36px)' : 'calc(85%)' }}
+      >
         {comments.map((comment) => (
           <CommentItem key={comment.id} comment={comment} />
         ))}
@@ -186,7 +207,7 @@ const CommentSection: React.FC<{
           </div>
         )}
         <div ref={loadMoreRef} className="h-1" />
-      </div>
+      </motion.div>
       <div className="absolute bottom-0 left-0 right-0 bg-white p-4 border-t border-gray-200 flex items-center">
         <img src="https://i.pravatar.cc/150?img=1" alt="Your profile" className="w-8 h-8 rounded-full mr-2" />
         <input
@@ -209,7 +230,7 @@ const InstagramComments: React.FC = () => {
 
   const loadMoreComments = useCallback(async () => {
     setLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     const newComments = generateSampleComments(10);
     setComments((prevComments) => [...prevComments, ...newComments]);
     setLoading(false);
@@ -245,16 +266,13 @@ const InstagramComments: React.FC = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-100 py-2">
       <div className="relative w-full max-w-md mx-auto" ref={containerRef}>
         <InstagramPost post={samplePost} onViewComments={handleViewComments} />
-        <AnimatePresence>
-          {showComments && (
-            <CommentSection
-              comments={comments}
-              loading={loading}
-              onDragEnd={handleDragEnd}
-              loadMoreComments={loadMoreComments}
-            />
-          )}
-        </AnimatePresence>
+        <CommentSection
+          comments={comments}
+          loading={loading}
+          onDragEnd={handleDragEnd}
+          loadMoreComments={loadMoreComments}
+          isVisible={showComments}
+        />
       </div>
     </div>
   );
