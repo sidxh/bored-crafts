@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react'
-import { SpotifyLibraryContainer, SpotifyLibraryNavbar, SpotifyLibraryPlaylist, SpotifyNavigation, SpotifyNavigationLibraryContainer, FilterType } from '../(specificSubComponents)/spotify-playlists/SpotifyPlaylistsAll'
+import { SpotifyLibraryContainer, SpotifyLibraryNavbar, SpotifyLibraryPlaylist, SpotifyNavigation, SpotifyNavigationLibraryContainer, FilterType } from '@/components/(specificSubComponents)/spotify-playlists/SpotifyPlaylistsAll'
 
 const SpotifyPlaylists = () => {
   const [selectedFilter, setSelectedFilter] = useState<FilterType | null>(null);
