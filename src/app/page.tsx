@@ -11,7 +11,8 @@ export default function Home() {
           <Link href='/luma-clone' className="mb-4 w-fit hover:text-yellow-600">luma clone</Link>
         </ul>
         <ul className="flex flex-col">
-          <Link href='/spotify-playlists' className="mb-4 w-fit hover:text-yellow-600">spotify playlists</Link>
+          <Link href='/spotify-playlists' className="mb-4 w-fit hover:text-yellow-600">spotify filters</Link>
+          <Link href='/instagram-comments' className="mb-4 w-fit hover:text-yellow-600">instagram comments</Link>
         </ul>
       </div>
     </main>
