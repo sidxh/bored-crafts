@@ -9,6 +9,7 @@ export default function Home() {
         <ul className="flex flex-col">
           <Link href='/button' className="mb-4 w-fit hover:text-yellow-600">button</Link>
           <Link href='/luma-clone' className="mb-4 w-fit hover:text-yellow-600">luma clone</Link>
+          <Link href='/coupon-redemption' className="mb-4 w-fit hover:text-yellow-600">coupon redemption</Link>
         </ul>
         <ul className="flex flex-col">
           <Link href='/spotify-playlists' className="mb-4 w-fit hover:text-yellow-600">spotify filters</Link>
