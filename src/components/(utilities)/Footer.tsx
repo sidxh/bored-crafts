@@ -15,21 +15,21 @@ const Footer: React.FC<FooterProps> = ({ prevComponent, nextComponent, formatNam
           className="text-gray-600 hover:text-indigo-600 transition-colors duration-300 ease-in-out group flex items-center text-sm sm:text-base"
         >
           <span className="mr-1 sm:mr-2 text-base sm:text-lg">←</span>
-          <span className="relative hidden sm:inline">
-            {formatName(prevComponent)}
+          <span className="relative">
+            <span className="hidden xs:inline">{formatName(prevComponent)}</span>
+            <span className="xs:hidden">{formatName(prevComponent).split(' ')[0]}</span>
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 ease-in-out group-hover:w-full"></span>
           </span>
-          <span className="sm:hidden">Prev</span>
         </Link>
         <Link 
           href={`/${nextComponent}`} 
           className="text-gray-600 hover:text-indigo-600 transition-colors duration-300 ease-in-out group flex items-center text-sm sm:text-base"
         >
-          <span className="relative hidden sm:inline">
-            {formatName(nextComponent)}
+          <span className="relative">
+            <span className="hidden xs:inline">{formatName(nextComponent)}</span>
+            <span className="xs:hidden">{formatName(nextComponent).split(' ')[0]}</span>
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 ease-in-out group-hover:w-full"></span>
           </span>
-          <span className="sm:hidden">Next</span>
           <span className="ml-1 sm:ml-2 text-base sm:text-lg">→</span>
         </Link>
       </div>
