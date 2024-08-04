@@ -12,23 +12,25 @@ const Footer: React.FC<FooterProps> = ({ prevComponent, nextComponent, formatNam
       <div className="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
         <Link 
           href={`/${prevComponent}`} 
-          className="text-gray-600 hover:text-indigo-600 transition-colors duration-300 ease-in-out group flex items-center"
+          className="text-gray-600 hover:text-indigo-600 transition-colors duration-300 ease-in-out group flex items-center text-sm sm:text-base"
         >
-          <span className="mr-2 text-lg">←</span>
-          <span className="relative">
+          <span className="mr-1 sm:mr-2 text-base sm:text-lg">←</span>
+          <span className="relative hidden sm:inline">
             {formatName(prevComponent)}
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 ease-in-out group-hover:w-full"></span>
           </span>
+          <span className="sm:hidden">Prev</span>
         </Link>
         <Link 
           href={`/${nextComponent}`} 
-          className="text-gray-600 hover:text-indigo-600 transition-colors duration-300 ease-in-out group flex items-center"
+          className="text-gray-600 hover:text-indigo-600 transition-colors duration-300 ease-in-out group flex items-center text-sm sm:text-base"
         >
-          <span className="relative">
+          <span className="relative hidden sm:inline">
             {formatName(nextComponent)}
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 ease-in-out group-hover:w-full"></span>
           </span>
-          <span className="ml-2 text-lg">→</span>
+          <span className="sm:hidden">Next</span>
+          <span className="ml-1 sm:ml-2 text-base sm:text-lg">→</span>
         </Link>
       </div>
     </footer>
