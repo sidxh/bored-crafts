@@ -12,7 +12,7 @@ const LumaCloneCraft = () => {
         Luma Clone <span className="text-indigo-600">Component</span>
       </h1>
       <p className="text-xl text-gray-600 mb-12">
-        A reimagination of Luma's interactive design
+        A reimagination of Luma&apos;s interactive design
       </p>
       <Link 
         href={"/preview/luma-clone"}
