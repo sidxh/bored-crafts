@@ -53,7 +53,7 @@ const CouponRedemptionPage = () => {
 
         <h3 className="text-2xl font-semibold mb-4">Usage</h3>
         <p className="mb-4">To use the Coupon Redemption Component in your project, import it and include it in your React component:</p>
-        <pre className="bg-gray-100 p-4 rounded-md mb-6"><code>{`import CouponRedemption from './CouponRedemption';
+        <pre className="overflow-x-auto whitespace-pre-wrap break-words bg-gray-100 p-4 rounded-md mb-6"><code>{`import CouponRedemption from './CouponRedemption';
 
 <CouponRedemption onRedeem={(coupon) => handleRedemption(coupon)} />`}</code></pre>
 

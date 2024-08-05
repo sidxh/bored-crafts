@@ -53,7 +53,7 @@ const InstagramCommentsPage = () => {
 
         <h3 className="text-2xl font-semibold mb-4">Usage</h3>
         <p className="mb-4">To use the Instagram Comments Component in your project, import it and pass the necessary props:</p>
-        <pre className="bg-gray-100 p-4 rounded-md mb-6"><code>{`import InstagramComments from './InstagramComments';
+        <pre className="overflow-x-auto whitespace-pre-wrap break-words bg-gray-100 p-4 rounded-md mb-6"><code>{`import InstagramComments from './InstagramComments';
 
 <InstagramComments post={samplePost} />`}</code></pre>
 
