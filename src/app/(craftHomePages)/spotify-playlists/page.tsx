@@ -35,7 +35,7 @@ const SpotifyPlaylistsPage = () => {
         </ul>
 
         <h3 className="text-2xl font-semibold mb-4">Introduction</h3>
-        <p className="mb-6">The Spotify Playlists Component is a React-based implementation that replicates the core functionality of Spotify's playlist management system.</p>
+        <p className="mb-6">The Spotify Playlists Component is a React-based implementation that replicates the core functionality of Spotify&apos;s playlist management system.</p>
 
         <h3 className="text-2xl font-semibold mb-4">Component Overview</h3>
         <p className="mb-6">The component consists of a playlist display, search functionality, and track management features.</p>
@@ -49,7 +49,7 @@ const SpotifyPlaylistsPage = () => {
         </ul>
 
         <h3 className="text-2xl font-semibold mb-4">Implementation</h3>
-        <p className="mb-6">The component is implemented using React hooks for state management, react-beautiful-dnd for drag-and-drop functionality, and custom styling to mimic Spotify's interface.</p>
+        <p className="mb-6">The component is implemented using React hooks for state management, react-beautiful-dnd for drag-and-drop functionality, and custom styling to mimic Spotify&apos;s interface.</p>
 
         <h3 className="text-2xl font-semibold mb-4">Usage</h3>
         <p className="mb-4">To use the Spotify Playlists Component in your project, import it and include it in your React component:</p>

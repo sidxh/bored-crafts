@@ -35,7 +35,7 @@ const InstagramCommentsPage = () => {
         </ul>
 
         <h3 className="text-2xl font-semibold mb-4">Introduction</h3>
-        <p className="mb-6">The Instagram Comments Component is a React-based implementation that replicates the core functionality and appearance of Instagram's comment section.</p>
+        <p className="mb-6">The Instagram Comments Component is a React-based implementation that replicates the core functionality and appearance of Instagram&apos;s comment section.</p>
 
         <h3 className="text-2xl font-semibold mb-4">Component Overview</h3>
         <p className="mb-6">The component consists of two main parts: the Instagram Post display and the Comments section.</p>
