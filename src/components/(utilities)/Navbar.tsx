@@ -20,13 +20,13 @@ const Navbar = () => {
         <div className='hidden sm:flex gap-8'>
           <Link 
             href={`/preview/${pathname}`}
-            className='text-gray-600 hover:text-indigo-600 transition-colors'
+            className='text-gray-600 hover:text-indigo-600 transition-colors text-lg'
           >
             Preview
           </Link>
           <Link 
             href={pathname}
-            className='text-gray-600 hover:text-indigo-600 transition-colors'
+            className='text-gray-600 hover:text-indigo-600 transition-colors text-lg'
           >
             Implementation
           </Link>
