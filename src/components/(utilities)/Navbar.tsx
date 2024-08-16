@@ -22,13 +22,13 @@ const Navbar = () => {
             href={`/preview/${pathname}`}
             className='text-gray-600 hover:text-indigo-600 transition-colors text-lg'
           >
-            Preview
+            0review
           </Link>
           <Link 
             href={pathname}
             className='text-gray-600 hover:text-indigo-600 transition-colors text-lg'
           >
-            Implementation
+            implementation
           </Link>
         </div>
 
