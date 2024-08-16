@@ -22,7 +22,7 @@ const Navbar = () => {
             href={`/preview/${pathname}`}
             className='text-gray-600 hover:text-indigo-600 transition-colors text-lg'
           >
-            0review
+            preview
           </Link>
           <Link 
             href={pathname}
